@@ -1,5 +1,5 @@
 source 'http://gemcutter.org'
-
+gem 'rackup'
 gem 'sinatra'
 gem 'arcserver.rb'
 

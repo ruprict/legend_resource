@@ -8,7 +8,10 @@ images for ArcGIS Server services.
 1) Fork/clone this github repo
 2) cd into legend_resource dir
 3) bundle install
-4) Deploy or start the server (rails s)
+4) Deploy or start the server (rackup)
+
+If you are on Windows, your life is a bit harder (for various reasons ;))  You'll have to manually install
+the rmagick gem...go here to find out how http://rmagick.rubyforge.org/install-faq.html#win
 
 # Usage
 Presuming your app is running at http://localhost:3000 and you want a legend for a 
