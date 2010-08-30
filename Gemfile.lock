@@ -1,0 +1,29 @@
+GEM
+  remote: http://gemcutter.org/
+  specs:
+    arcserver.rb (0.1.3)
+      handsoap (>= 1.1.0)
+      httparty (>= 0.4.5)
+      httpclient (>= 2.1.5)
+      nokogiri (>= 1.3.3)
+    crack (0.1.8)
+    gstore (0.2.1)
+    handsoap (1.1.7)
+    httparty (0.6.1)
+      crack (= 0.1.8)
+    httpclient (2.1.5.2)
+    nokogiri (1.4.3.1)
+    rack (1.1.0)
+    rmagick (2.13.1)
+    sinatra (1.0)
+      rack (>= 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  arcserver.rb
+  gstore
+  rack (= 1.1.0)
+  rmagick
+  sinatra
