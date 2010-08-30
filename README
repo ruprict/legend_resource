@@ -11,10 +11,15 @@ images for ArcGIS Server services.
 4) Deploy or start the server (rackup)
 
 # Config options.
-There is a Google Storage backend. To use it, copy gstore.yml.tpl to gstore.yml and modify the access/secret key information.
+There is a Google Storage backend. To use it:
+1) Copy gstore.yml.tpl to gstore.yml and modify the access/secret key information.
+2) Uncomment the line in config.ru that sets the filehandler
 
+(I know this isn't very Ruby way-ish, but I am still learning....)
 
+By default, the sinatra app just uses the File module to write images to the file system.
 
+# Windows users
 If you are on Windows, your life is a bit harder (for various reasons ;))  You'll have to manually install
 the rmagick gem...go here to find out how http://rmagick.rubyforge.org/install-faq.html#win
 
@@ -29,7 +34,7 @@ image.
 
 ## Deleting a Legend
 - Issue an HTTP DELETE to http://localhost:3000/legend/server.arcgisonline.com/Demographics/ESRI_Diversity_US_2D
--- This will delete the cached image.  The next HTTP GET to this URL will create a new one.
+-- This will delete the cached image.  The next HTTP GET to this URL will create a new one.  I use curl for this
 
 That's it for now.  It didn't make sense to me to add PUT or POST actions to the resource, since it generates the
 legend.  Maybe a future version will allow you to PUT a legend for a service...
