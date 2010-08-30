@@ -1,13 +1,13 @@
 legend_resource - a Rails 3 app that creates legends for ArcGIS Server map services
 
 The idea behind legend_resource is to create a no-config option for creating legend
-images for ArcGIS Server services.
+images for ArcGIS Server services.  This uses the arcserver.rb and gstore gems.
 
 # Installation
 
 1) Fork/clone this github repo
 2) cd into legend_resource dir
-3) bundle install
+3) bundle install (If you get a message about Bundler versions, use gem install bundler --pre)
 4) Deploy or start the server (rackup)
 
 # Config options.
