@@ -5,3 +5,6 @@ gem 'arcserver.rb'
 
 # Uncomment if not on windows
 gem 'rmagick'
+
+# Uncomment if using gstore
+gem 'gstore'

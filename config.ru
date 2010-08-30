@@ -1,8 +1,9 @@
 require 'rubygems'
 require 'bundler'
-require 'rmagick'
-Bundler.setup
 
+Bundler.setup
+#require 'rmagick'
 require 'sinatra'
-require 'legend_resource'
+require './legend_resource'
+
 run LegendResource

@@ -1,61 +1,49 @@
+#!/usr/bin/ruby
 require 'rubygems'
 require 'sinatra'
 require 'arcserver'
+require './lib/backends/gstore_legend'
+require './lib/backends/fileutils_legend'
 
 class LegendResource < Sinatra::Base
+
+	set :filehandler, GStoreLegend
 	
-	get '/legend/:server/:folder/:mapservice' do
-		create_legend
+	
+	get '/legend/:server/*' do
+		generate_legend_image do |image| 
+		  puts "generating image"
+		  settings.filehandler.write(image,legend_image_filename) 
+    end unless settings.filehandler.exists?(legend_image_filename)
+    puts "Exists?=#{settings.filehandler.exists?(legend_image_filename)}"
+		settings.filehandler.send(legend_image_filename)
 	end
 	
-	get '/legend/:server/:mapservice' do
-		create_legend
+	delete '/legend/:server/*' do
+	  if settings.filehandler.exists?(legend_image_filename)
+	    settings.filehandler.delete(legend_image_filename)
+	    status 200
+    else
+      status 204
+    end
+	end
+  
+  private
+	
+	def service_path
+	  params[:splat].first
 	end
 	
-	delete '/legend/:server/:folder/:mapservice' do
-	  delete_legend
-  	end
-  	
-  	delete '/legend/:server/:mapservice' do
-	  delete_legend
-  	end
-	
-	
-	private
-	
-	def create_legend
-		url, filename = get_url_and_filename
-		puts url
-	    if (!File.exists?(filename))
-	      mapserver = ArcServer::MapServer.new(url)
-	      
-	      img = mapserver.get_legend_image
-	      img.write(filename)
-	    end
-	    send_file(filename,:type=>"image/png")
+	def generate_legend_image
+	  puts "generating image"
+	  image = ArcServer::MapServer.new("http://#{params[:server]}/ArcGIS/services/#{service_path}/MapServer").get_legend_image
+	  yield image
+	  image.destroy!
 	end
 	
-	def delete_legend
-		url, filename = get_url_and_filename
-	    if (File.exists?(filename))
-	      File.delete(filename)
-	      status 200 
-	    else
-	      status 204
-	    end
+	def legend_image_filename
+	  "#{params[:server]}_#{service_path.split('/').join('_')}.png"
 	end
 	
-	def get_url_and_filename
-		server = params[:server]
-		mapservice = params[:mapservice]
-		if params[:folder].nil?
-		  folder=nil
-		else
-		  folder = params[:folder] + "/"
-		end
-		url = "http://#{server}/ArcGIS/services/#{folder}#{mapservice}/MapServer"
-		
-		filename="public/images/#{server}_#{mapservice}.png"
-		[url,filename]
-	end
+	
 end
