@@ -7,9 +7,7 @@ require './lib/backends/fileutils_legend'
 
 class LegendResource < Sinatra::Base
 
-	set :filehandler, GStoreLegend
-	
-	
+		
 	get '/legend/:server/*' do
 		generate_legend_image do |image| 
 		  puts "generating image"

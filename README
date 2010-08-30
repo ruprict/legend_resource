@@ -10,6 +10,11 @@ images for ArcGIS Server services.
 3) bundle install
 4) Deploy or start the server (rackup)
 
+# Config options.
+There is a Google Storage backend. To use it, copy gstore.yml.tpl to gstore.yml and modify the access/secret key information.
+
+
+
 If you are on Windows, your life is a bit harder (for various reasons ;))  You'll have to manually install
 the rmagick gem...go here to find out how http://rmagick.rubyforge.org/install-faq.html#win
 
