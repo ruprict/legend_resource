@@ -7,13 +7,12 @@ require './lib/backends/fileutils_legend'
 
 class LegendResource < Sinatra::Base
 
+  set :filehandler, File 
 		
 	get '/legend/:server/*' do
 		generate_legend_image do |image| 
-		  puts "generating image"
 		  settings.filehandler.write(image,legend_image_filename) 
     end unless settings.filehandler.exists?(legend_image_filename)
-    puts "Exists?=#{settings.filehandler.exists?(legend_image_filename)}"
 		settings.filehandler.send(legend_image_filename)
 	end
 	
@@ -33,7 +32,6 @@ class LegendResource < Sinatra::Base
 	end
 	
 	def generate_legend_image
-	  puts "generating image"
 	  image = ArcServer::MapServer.new("http://#{params[:server]}/ArcGIS/services/#{service_path}/MapServer").get_legend_image
 	  yield image
 	  image.destroy!
