@@ -10,6 +10,7 @@ class GStoreLegend
     )
     
   def self.exists?( object_name)
+      puts ("GStoreLegend.exists #{object_name}")
       bucket_name, service_name = object_name.split(/_/,2)
       # So, Google Storage wants domain verification on buckets with dots in them
       bucket_name.gsub!(".","_")
