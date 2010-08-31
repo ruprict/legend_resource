@@ -15,7 +15,7 @@ class GStoreLegend
       # So, Google Storage wants domain verification on buckets with dots in them
       bucket_name.gsub!(".","_")
       @@client.get_object(bucket_name, service_name).match(/does not exist/).nil?
-      puts "GStoreLegend.exists leaving")
+      puts "GStoreLegend.exists leaving"
   end
   
   def self.delete(object_name)
