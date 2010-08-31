@@ -1,6 +1,7 @@
 require 'gstore'
 require 'kconv'
 require 'yaml'
+require 'tempfile'
 
 class GStoreLegend
    CONFIG = YAML.load_file('gstore.yml') unless defined? CONFIG
@@ -34,16 +35,16 @@ class GStoreLegend
       puts @@client.create_bucket(bucket_name)
     end
     data.format='PNG'
-    @@client.put_object(bucket_name, service_name, :data=>data.to_blob)
+   
+    @@client.put_object(bucket_name, service_name, :data=>data.to_blob,:headers=>{:content_length=>data.to_blob.length,:content_type=>"image/png"})
   end
   
   def self.send(object_name)
     bucket_name, service_name = object_name.split(/_/,2)
     # So, Google Storage wants domain verification on buckets with dots in them
     bucket_name.gsub!(".","_")
-    res = @@client.get_object(bucket_name, service_name)
-    puts res
-    res
+
+    @@client.get_object(bucket_name, service_name)
   end
   
 end
