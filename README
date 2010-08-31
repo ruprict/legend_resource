@@ -12,7 +12,11 @@ images for ArcGIS Server services.  This uses the arcserver.rb and gstore gems.
 
 # Config options.
 There is a Google Storage backend. To use it:
-1) Copy gstore.yml.tpl to gstore.yml and modify the access/secret key information.
+1) Change gstore.yml and modify the access/secret key and bucket information.
+2) Uncomment the line in config.ru that sets the filehandler
+
+There is an S3 Backend. To use it:
+1) Change amazon_s3.yml and modify the access/secret key and bucket information.
 2) Uncomment the line in config.ru that sets the filehandler
 
 (I know this isn't very Ruby way-ish, but I am still learning....)
