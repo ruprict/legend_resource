@@ -10,11 +10,11 @@ class LegendResource < Sinatra::Base
   set :filehandler, File 
 		
 	get '/legend/:server/*' do
-	  puts "handling #{params[:server]}"
+
 		generate_legend_image do |image| 
 		  settings.filehandler.write(image,legend_image_filename) 
     end unless settings.filehandler.exists?(legend_image_filename)
-    content_type "image/png"
+
 		settings.filehandler.send(legend_image_filename)
 	end
 	
