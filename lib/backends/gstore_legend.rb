@@ -42,8 +42,9 @@ class GStoreLegend
     bucket_name, service_name = object_name.split(/_/,2)
     # So, Google Storage wants domain verification on buckets with dots in them
     bucket_name.gsub!(".","_")
-    @@client.get_object(bucket_name, service_name)
-  
+    res = @@client.get_object(bucket_name, service_name)
+    puts res
+    res
   end
   
 end
