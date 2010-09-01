@@ -1,5 +1,6 @@
 require 'aws/s3'
 require 'yaml'
+require 'tempfile'
 
 class S3Legend
   CONFIG = YAML.load_file('amazon_s3.yml') unless defined? CONFIG
@@ -27,10 +28,13 @@ class S3Legend
   end
   
   def self.send(object_name)
+  	t = Tempfile.new("tmp_path")
+  	t.binmode
+  	t.write AWS::S3::S3Object.find(object_name, @@bucket).value
+    t.rewind
     
-    
-
-    AWS::S3::S3Object.find(object_name, @@bucket).value
+    puts "path=#{t.path}"
+    t.path
   end
   
 end

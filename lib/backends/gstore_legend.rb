@@ -24,13 +24,19 @@ class GStoreLegend
   def self.write(data, object_name)
     # So, Google Storage wants domain verification on buckets with dots in them
     @@bucket.gsub!(".","_")
+    data.format="PNG"
     @@client.put_object(@@bucket, object_name, :data=>data.to_blob,:headers=>{:content_length=>data.to_blob.length,:content_type=>"image/png"})
   end
   
   def self.send(object_name)
     # So, Google Storage wants domain verification on buckets with dots in them
     @@bucket.gsub!(".","_")
-    @@client.get_object(@@bucket, object_name)
+    t = Tempfile.new("tmp_path")
+  	t.binmode
+  	t.write @@client.get_object(@@bucket, object_name)
+    t.rewind
+    t.close
+    t.path
   end
   
 end

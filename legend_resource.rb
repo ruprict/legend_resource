@@ -14,18 +14,18 @@ class LegendResource < Sinatra::Base
 	  
 		generate_legend_image do |image| 
 		  settings.filehandler.write(image,legend_image_filename) 
-    end unless settings.filehandler.exists?(legend_image_filename)
-    content_type "image/png"
-		settings.filehandler.send(legend_image_filename)
+    	end unless settings.filehandler.exists?(legend_image_filename)
+    	content_type "image/png"
+		send_file(settings.filehandler.send(legend_image_filename))
 	end
 	
 	delete '/legend/:server/*' do
-	  if settings.filehandler.exists?(legend_image_filename)
-	    settings.filehandler.delete(legend_image_filename)
-	    status 200
-    else
-      status 204
-    end
+  		if settings.filehandler.exists?(legend_image_filename)
+	    	settings.filehandler.delete(legend_image_filename)
+	    	status 200
+    	else
+      		status 204
+    	end
 	end
   
   private

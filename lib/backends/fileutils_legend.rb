@@ -4,7 +4,7 @@ class File
   end
   
   def self.send(legend_image_filename)
-    File.read(legend_image_filename)
+   legend_image_filename
   end
   
   

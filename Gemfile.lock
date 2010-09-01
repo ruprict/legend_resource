@@ -19,19 +19,19 @@ GEM
     httpclient (2.1.5.2)
     mime-types (1.16)
     nokogiri (1.4.3.1)
+    nokogiri (1.4.3.1-x86-mingw32)
     rack (1.1.0)
-    rmagick (2.13.1)
     sinatra (1.0)
       rack (>= 1.0)
     xml-simple (1.0.12)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   arcserver.rb
   aws-s3
   gstore
   rack (= 1.1.0)
-  rmagick
   sinatra

@@ -5,7 +5,7 @@ gem 'arcserver.rb'
 gem 'aws-s3'
 
 # Uncomment if not on windows
-gem 'rmagick'
+#gem 'rmagick'
 
 # Uncomment if using gstore
 gem 'gstore'
